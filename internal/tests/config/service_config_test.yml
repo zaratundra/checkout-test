@@ -1,0 +1,6 @@
+server:
+  port: 7070
+
+data:
+  products: "../internal/tests/config/products.json"
+  promotions: "../internal/tests/config/promotions.json"

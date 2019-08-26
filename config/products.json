@@ -1,0 +1,17 @@
+[
+  {
+    "code": "VOUCHER",
+    "name": "Cabify Voucher",
+    "price": 500
+  },
+  {
+    "code": "TSHIRT",
+    "name": "Cabify T-Shirt",
+    "price": 2000
+  },
+  {
+    "code": "MUG",
+    "name": "Cabify Coffee Mug",
+    "price": 750
+  }
+]

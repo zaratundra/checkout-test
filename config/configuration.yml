@@ -1,0 +1,6 @@
+server:
+  port: 7070
+
+data:
+  products: "./config/products.json"
+  promotions: "./config/promotions.json"

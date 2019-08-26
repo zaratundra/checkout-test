@@ -1,0 +1,23 @@
+language: go
+
+os:
+  - linux
+
+env:
+  - GO111MODULE=on
+
+go:
+  - 1.12.x
+
+# Get last commit
+git:
+  depth: 1
+
+jobs:
+  include:
+    - stage: "Unit Tests"
+      script: make unit-tests
+    - stage: build
+      script: make build
+    - stage: "Integration Tests"
+      script: make integration-tests

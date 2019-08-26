@@ -1,0 +1,30 @@
+[
+  {
+    "code": "BULK",
+    "promos": [
+      {
+        "product": "TSHIRT",
+        "rules": [
+          {
+            "buy": 3,
+            "price": 1900
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "code": "FREE_ITEMS",
+    "promos": [
+      {
+        "product": "VOUCHER",
+        "rules": [
+          {
+            "buy": 2,
+            "free": 1
+          }
+        ]
+      }
+    ]
+  }
+]

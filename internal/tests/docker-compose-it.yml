@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+
+  checkout:
+    image: local/checkout-service:latest
+    restart: on-failure
+    ports:
+      - 7070:7070
+    command: "/bin/checkout/checkout-service"
+    # Add curl to the image if you want to use health check
+    #healthcheck:
+    #  test: ["CMD", "curl", "-f", "http://localhost:8080/api/v1/healthcheck/"]
+    #  interval: 30s
+    #  timeout: 2s
+    #  retries: 3
+    #  start_period: 10s
+
