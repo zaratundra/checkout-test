@@ -9,7 +9,7 @@ dependencies:
 	@GO111MODULE=on go mod download
 	@GO111MODULE=on go mod verify
 
-build: dependencies
+build:
 	@echo "$(OK_COLOR)==> Building... $(NO_COLOR)"
 	@docker build . -t local/checkout-service
 

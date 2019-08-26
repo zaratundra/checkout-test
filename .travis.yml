@@ -5,6 +5,7 @@ os:
 
 env:
   - GO111MODULE=on
+  - DOCKER_COMPOSE_VERSION=1.24.1
 
 go:
   - 1.12.x
@@ -23,6 +24,11 @@ jobs:
     - stage: build
       script: make build
     - stage: "Integration Tests"
+      before_install:
+        - sudo rm /usr/local/bin/docker-compose
+        - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+        - chmod +x docker-compose
+        - sudo mv docker-compose /usr/local/bin
       #This should get the image from a registry instead of build it again!
       install: make build
       script: make integration-tests
