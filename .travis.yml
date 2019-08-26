@@ -13,6 +13,9 @@ go:
 git:
   depth: 1
 
+services:
+  - docker
+
 jobs:
   include:
     - stage: "Unit Tests"
@@ -20,4 +23,6 @@ jobs:
     - stage: build
       script: make build
     - stage: "Integration Tests"
+      #This should get the image from a registry instead of build it again!
+      install: make build
       script: make integration-tests
