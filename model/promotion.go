@@ -1,9 +1,5 @@
 package model
 
-import (
-	"log"
-)
-
 type PromotionType string
 
 type Promotion interface {
@@ -34,12 +30,8 @@ func (b BulkPromotion) GetType() PromotionType {
 }
 
 func (b BulkPromotion) Resolve(lines map[ProductCode]Line, inOffer map[ProductCode]*[]int) {
-	log.Printf("--- Bulk Promotion ---")
 	for pCode, rules := range b.offers {
-		log.Println("\tProduct: ", pCode)
-
 		if line, ok := lines[pCode]; ok {
-			log.Printf("\tFound %v in the basket\n", line.amount)
 
 			for _, rule := range rules {
 				amountAvailable := line.amount
@@ -55,15 +47,11 @@ func (b BulkPromotion) Resolve(lines map[ProductCode]Line, inOffer map[ProductCo
 					//elements := promotions * rule.Buy
 
 					if !ok || alreadyInOffer == nil {
-						log.Printf("\tCreating offer slice for product: %v\n", pCode)
 						inOffer[pCode] = &[]int{}
 					}
 
 					for i := 0; i < amountAvailable; i++ {
 						*inOffer[pCode] = append(*inOffer[pCode], rule.Price)
-						log.Printf("\tinOffer length: %v\n", len(*inOffer[pCode]))
-
-						log.Printf("\t%v elements remaining\n", amountAvailable-i-1)
 					}
 				}
 			}
@@ -92,12 +80,8 @@ func (f FreeItemsPromotion) GetType() PromotionType {
 }
 
 func (f FreeItemsPromotion) Resolve(lines map[ProductCode]Line, inOffer map[ProductCode]*[]int) {
-	log.Printf("--- Free Items Promotion ---")
 	for pCode, rules := range f.offers {
-		log.Println("\tProduct: ", pCode)
-
 		if line, ok := lines[pCode]; ok {
-			log.Printf("\tFound %v in the basket\n", line.amount)
 
 			for _, rule := range rules {
 				amountAvailable := line.amount
@@ -108,12 +92,10 @@ func (f FreeItemsPromotion) Resolve(lines map[ProductCode]Line, inOffer map[Prod
 				}
 
 				promotions := amountAvailable / rule.Buy
-				log.Printf("\tEnough items for %v rule %v\n", promotions, rule)
 				if promotions > 0 {
 					elements := promotions * rule.Buy
 
 					if !ok || alreadyInOffer == nil {
-						log.Printf("\tCreating offer slice for product: %v\n", pCode)
 						inOffer[pCode] = &[]int{}
 					}
 
@@ -123,10 +105,6 @@ func (f FreeItemsPromotion) Resolve(lines map[ProductCode]Line, inOffer map[Prod
 						} else {
 							*inOffer[pCode] = append(*inOffer[pCode], line.Product.Price)
 						}
-
-						log.Printf("\tinOffer length: %v\n", len(*inOffer[pCode]))
-
-						log.Printf("\t%v elements remaining\n", elements-i-1)
 					}
 				}
 			}

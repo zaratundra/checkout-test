@@ -14,12 +14,12 @@ build:
 	@docker build . -t local/checkout-service
 
 unit-tests:
-	@GO111MODULE=on go test -v -short ./...
+	@GO111MODULE=on go test -v -race -short ./...
 
 integration-tests: docker-it-up
 	@./waitForContainer.sh
 	@echo "$(OK_COLOR)==> Running ITs$(NO_COLOR)"
-	@GO111MODULE=on go test -v ./internal/tests/integration/...; docker-compose -f ./internal/tests/docker-compose-it.yml down
+	@GO111MODULE=on go test -v -race ./internal/tests/integration/...; docker-compose -f ./internal/tests/docker-compose-it.yml down
 
 docker-it-up:
 	@docker-compose -f ./internal/tests/docker-compose-it.yml up -d

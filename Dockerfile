@@ -9,6 +9,7 @@ COPY . .
 
 # Using go mod.
 ENV GO111MODULE=on
+ENV GOPROXY=https://proxy.golang.org
 RUN go mod download
 RUN go mod verify
 
